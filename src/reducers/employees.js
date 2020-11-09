@@ -4,32 +4,32 @@ export default function employees(state = [], action) {
 	switch (action.type) {
 		case ADD_EMPLOYEE:
 			const employeeExists = state.some(employee => employee.employeeId === action.payload.id);
-			if (!employeeExists) {
-				return [
-					...state,
-					{
-						employeeId: action.payload.id,
-						workHistory: [
-							{
+			if (employeeExists) {
+				return state.map(employee =>
+					employee.employeeId === action.payload.id ? {
+						...employee,
+							workHistory: [{
 								projectId: action.payload.projectId,
 								dateFrom: action.payload.dateFrom,
 								dateTo: action.payload.dateTo
-							}
-						]
-					}
-				]
+							}, ...employee.workHistory]
+					} : employee
+				)
 			}
-			return state.map(employee =>
-        employee.employeeId === action.payload.id ? {
-					...employee,
-						workHistory: [{
+			return [
+				...state,
+				{
+					employeeId: action.payload.id,
+					workHistory: [
+						{
 							projectId: action.payload.projectId,
 							dateFrom: action.payload.dateFrom,
 							dateTo: action.payload.dateTo
-						}, ...employee.workHistory]
-				} : employee
-			)
+						}
+					]
+				}
+			]
 		default:
 			return state
-		}
+	}
 }

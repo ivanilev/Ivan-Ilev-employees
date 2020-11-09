@@ -1,0 +1,9 @@
+.main-grid {
+	border: solid 1px black;
+	.col:not(:last-child) {
+		border-right: solid 1px black;
+	}
+	.row:first-child {
+		border-bottom: 1px solid black;
+	}
+}

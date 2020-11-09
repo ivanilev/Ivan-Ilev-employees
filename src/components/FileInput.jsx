@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import StartProcess from '../utilities/algorithm'
 
 class FileInput extends Component {
-
-
   logFile = async (e) => {
     e.preventDefault()
 		const reader = new FileReader()
@@ -19,14 +18,25 @@ class FileInput extends Component {
         })
         this.props.AddProject(dataLine[1])
       });
+
+      StartProcess()
     };
     reader.readAsText(e.target.files[0])
+
   }
 
   render() {
     return (
-      <div>
-        <input type="file" onChange={(e) => this.logFile(e)} />
+      <div className='mx-auto'>
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text">Upload</span>
+          </div>
+          <div className="custom-file">
+            <input type="file" className="custom-file-input" id="fileInput" onChange={(e) => this.logFile(e)} />
+            <label className="custom-file-label" htmlFor="fileInput">Choose file</label>
+          </div>
+        </div>
       </div>
     )
   }
