@@ -16,7 +16,6 @@ class FileInput extends Component {
           dateFrom: dataLine[2],
           dateTo: dataLine[3]
         })
-        this.props.AddProject(dataLine[1])
       });
 
       StartProcess()
